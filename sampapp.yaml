@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sampapp-service
+spec:
+  selector:
+    app: sampapp
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sampapp
+  labels:
+    app: sampapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: sampapp
+  template:
+    metadata:
+      labels:
+        app: sampapp
+    spec:
+      containers:
+      - name: sampapp
+        image: mikiangelica/sampapp:v1
+        ports:
+        - containerPort: 5000
