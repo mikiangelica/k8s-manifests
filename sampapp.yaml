@@ -31,3 +31,6 @@ spec:
         image: mikiangelica/sampapp:v1
         ports:
         - containerPort: 5000
+      - name: netshoot
+        image: nicolaka/netshoot
+        command: [ "sleep", "infinity" ]
