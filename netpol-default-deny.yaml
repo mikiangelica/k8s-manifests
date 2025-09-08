@@ -5,7 +5,5 @@ metadata:
   namespace: default
 spec:
   podSelector: {}
-    matchLabels:
-      role: db
   policyTypes:
   - Ingress
