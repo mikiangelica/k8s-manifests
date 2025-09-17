@@ -1,0 +1,173 @@
+apiVersion: v1
+items:
+- apiVersion: storage.k8s.io/v1
+  kind: StorageClass
+  metadata:
+    annotations:
+      defaultVolumeType: local
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{},"name":"local-path"},"provisioner":"rancher.io/local-path","reclaimPolicy":"Delete","volumeBindingMode":"WaitForFirstConsumer"}
+      objectset.rio.cattle.io/applied: H4sIAAAAAAAA/4yRz47UMAyHXwX53JYpnamqSBxg0V4QEhJoObuJOzVN4ypxi0areXeUMqDhwJ9j8ov9xZ+fARd+ophYAhhIKhHPVE1dqlhebjUUMHFwYODTj+jBY0pQwEyKDhXBPAOGIIrKElI+Ohpw9fokfp3p82UhMODFoocCpP9KVhNpFVkqi6qeMokz4i+5fAsUy/M2gYGpSXfJVhcv3nNwr984J+GfLQLOv/5T3sb9r6K0oM2V09pTmS5JaYbipzCbrVQ5ioGUdnmcypuJco/BgMaV4FqAx5787upP3BHTCAbqrhmak21Pw9Db5tAe20MzHJuhPnUH19m2w1cOe3fMTX+bbEEd8+USZeO8XIpgIGKwI8UMuHtWQMwD8PxRPNsLGHhHnjRr2fYdvuXgOJw/iMuAL8j6KPGRY9IHCWmdKcL1ewAAAP//KQ1Ko0kCAAA
+      objectset.rio.cattle.io/id: ""
+      objectset.rio.cattle.io/owner-gvk: k3s.cattle.io/v1, Kind=Addon
+      objectset.rio.cattle.io/owner-name: local-storage
+      objectset.rio.cattle.io/owner-namespace: kube-system
+      storageclass.kubernetes.io/is-default-class: "true"
+    creationTimestamp: "2025-09-08T10:09:39Z"
+    labels:
+      objectset.rio.cattle.io/hash: 183f35c65ffbc3064603f43f1580d8c68a2dabd4
+    name: local-path
+    resourceVersion: "10056"
+    uid: 8ad4aff4-7574-452d-aa57-ee59cd809ecc
+  provisioner: rancher.io/local-path
+  reclaimPolicy: Delete
+  volumeBindingMode: WaitForFirstConsumer
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      local.path.provisioner/selected-node: master1
+      pv.kubernetes.io/provisioned-by: rancher.io/local-path
+    creationTimestamp: "2025-09-15T16:32:58Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-87ab800a-aab9-48a8-a2ea-3d57ab5bd9cb
+    resourceVersion: "22992"
+    uid: 5d48920c-b56c-40ce-9fdf-36f15552ac72
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: pg-backup-pvc
+      namespace: default
+      resourceVersion: "22964"
+      uid: 87ab800a-aab9-48a8-a2ea-3d57ab5bd9cb
+    local:
+      path: /opt/local-path-provisioner/pvc-87ab800a-aab9-48a8-a2ea-3d57ab5bd9cb_default_pg-backup-pvc
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - master1
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: local-path
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-09-15T16:32:58Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      local.path.provisioner/selected-node: worker1
+      pv.kubernetes.io/provisioned-by: rancher.io/local-path
+    creationTimestamp: "2025-09-15T01:17:01Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-bab4c32a-5989-4662-ac1a-5f32c2f6495d
+    resourceVersion: "11736"
+    uid: 7bf1efa5-99af-477a-906a-447326515f1e
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: postgres-storage-postgres-0
+      namespace: default
+      resourceVersion: "10332"
+      uid: bab4c32a-5989-4662-ac1a-5f32c2f6495d
+    local:
+      path: /var/lib/rancher/k3s/storage/pvc-bab4c32a-5989-4662-ac1a-5f32c2f6495d_default_postgres-storage-postgres-0
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker1
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: local-path
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-09-15T01:17:01Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"name":"pg-backup-pvc","namespace":"default"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"1Gi"}},"storageClassName":"local-path"}}
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: master1
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2025-09-15T16:28:11Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    name: pg-backup-pvc
+    namespace: default
+    resourceVersion: "22994"
+    uid: 87ab800a-aab9-48a8-a2ea-3d57ab5bd9cb
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-87ab800a-aab9-48a8-a2ea-3d57ab5bd9cb
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: worker1
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2025-09-14T17:44:19Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app: postgres
+    name: postgres-storage-postgres-0
+    namespace: default
+    resourceVersion: "11739"
+    uid: bab4c32a-5989-4662-ac1a-5f32c2f6495d
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-bab4c32a-5989-4662-ac1a-5f32c2f6495d
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 1Gi
+    phase: Bound
+kind: List
+metadata:
+  resourceVersion: ""
