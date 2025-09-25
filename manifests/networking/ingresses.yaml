@@ -1,0 +1,35 @@
+apiVersion: v1
+items:
+- apiVersion: networking.k8s.io/v1
+  kind: Ingress
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"networking.k8s.io/v1","kind":"Ingress","metadata":{"annotations":{"nginx.ingress.kubernetes.io/rewrite-target":"/"},"name":"sampapp-ingress","namespace":"default"},"spec":{"ingressClassName":"nginx","rules":[{"host":"sampapp.local","http":{"paths":[{"backend":{"service":{"name":"sampapp-service","port":{"number":5000}}},"path":"/","pathType":"Prefix"}]}}]}}
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    creationTimestamp: "2025-09-18T15:35:25Z"
+    generation: 2
+    name: sampapp-ingress
+    namespace: default
+    resourceVersion: "63567"
+    uid: ad990b62-cc47-4bc4-8d28-a420327dfb9e
+  spec:
+    ingressClassName: nginx
+    rules:
+    - host: sampapp.local
+      http:
+        paths:
+        - backend:
+            service:
+              name: sampapp-service
+              port:
+                number: 5000
+          path: /
+          pathType: Prefix
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 10.43.230.85
+kind: List
+metadata:
+  resourceVersion: ""

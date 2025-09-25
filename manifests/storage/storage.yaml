@@ -68,6 +68,46 @@ items:
     annotations:
       local.path.provisioner/selected-node: worker1
       pv.kubernetes.io/provisioned-by: rancher.io/local-path
+    creationTimestamp: "2025-09-18T23:39:16Z"
+    finalizers:
+    - kubernetes.io/pv-protection
+    name: pvc-a5cd1783-13d6-4928-94f9-5aa81e9f1aae
+    resourceVersion: "58133"
+    uid: 7838ad6a-bb2e-4a3a-a849-c8e6460d5701
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
+    claimRef:
+      apiVersion: v1
+      kind: PersistentVolumeClaim
+      name: jenkins
+      namespace: jenkins
+      resourceVersion: "58101"
+      uid: a5cd1783-13d6-4928-94f9-5aa81e9f1aae
+    local:
+      path: /var/lib/rancher/k3s/storage/pvc-a5cd1783-13d6-4928-94f9-5aa81e9f1aae_jenkins_jenkins
+    nodeAffinity:
+      required:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - worker1
+    persistentVolumeReclaimPolicy: Delete
+    storageClassName: local-path
+    volumeMode: Filesystem
+  status:
+    lastPhaseTransitionTime: "2025-09-18T23:39:16Z"
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    annotations:
+      local.path.provisioner/selected-node: worker1
+      pv.kubernetes.io/provisioned-by: rancher.io/local-path
     creationTimestamp: "2025-09-15T01:17:01Z"
     finalizers:
     - kubernetes.io/pv-protection
@@ -167,6 +207,45 @@ items:
     - ReadWriteOnce
     capacity:
       storage: 1Gi
+    phase: Bound
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      meta.helm.sh/release-name: jenkins
+      meta.helm.sh/release-namespace: jenkins
+      pv.kubernetes.io/bind-completed: "yes"
+      pv.kubernetes.io/bound-by-controller: "yes"
+      volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+      volume.kubernetes.io/selected-node: worker1
+      volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+    creationTimestamp: "2025-09-18T23:39:05Z"
+    finalizers:
+    - kubernetes.io/pvc-protection
+    labels:
+      app.kubernetes.io/component: jenkins-controller
+      app.kubernetes.io/instance: jenkins
+      app.kubernetes.io/managed-by: Helm
+      app.kubernetes.io/name: jenkins
+      helm.sh/chart: jenkins-5.8.90
+    name: jenkins
+    namespace: jenkins
+    resourceVersion: "58136"
+    uid: a5cd1783-13d6-4928-94f9-5aa81e9f1aae
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 8Gi
+    storageClassName: local-path
+    volumeMode: Filesystem
+    volumeName: pvc-a5cd1783-13d6-4928-94f9-5aa81e9f1aae
+  status:
+    accessModes:
+    - ReadWriteOnce
+    capacity:
+      storage: 8Gi
     phase: Bound
 kind: List
 metadata:
