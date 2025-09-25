@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sampapp
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sampapp
+  template:
+    metadata:
+      labels:
+        app: sampapp
+    spec:
+      containers:
+      - name: sampapp
+        image: mikiangelica/sampapp:v1   # <-- Jenkins will update this line
+        ports:
+        - containerPort: 8080
