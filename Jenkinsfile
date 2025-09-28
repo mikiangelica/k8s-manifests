@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'docker-build' } 
     environment {
         IMAGE_NAME = "mikiangelica/sampapp"
         IMAGE_TAG  = "v1"
@@ -30,7 +30,7 @@ pipeline {
         stage('Update Manifests') {
             steps {
                 sh """
-                  sed -i 's|image: .*|image: $IMAGE_NAME:$IMAGE_TAG|' manifests/base/deployment.yaml
+                  sed -i 's|image: .*|	      image: $IMAGE_NAME:$IMAGE_TAG|' manifests/base/deployment.yaml
                   git config user.email "mikiangelica@gmail.com"
 		  git config user.name "admin"
                   git add manifests/base/deployment.yaml

@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: sampapp
-        image: mikiangelica/sampapp:v1   # <-- Jenkins will update this line
+        image: mikiangelica/sampapp:oldtag   # <-- Jenkins will update this line
         ports:
         - containerPort: 8080
