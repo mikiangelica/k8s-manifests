@@ -29,13 +29,16 @@ pipeline {
         }
         stage('Update Manifests') {
             steps {
+	    	withCredentials([usernamePassword(credentialsId: 'github-pat',
+						usernameVariable: 'GIT_USER',
+						passwordVariable: 'GIT_PASS')]) {
                 sh """
                   sed -i 's|image: .*|	      image: $IMAGE_NAME:$IMAGE_TAG|' manifests/base/deployment.yaml
                   git config user.email "mikiangelica@gmail.com"
 		  git config user.name "admin"
                   git add manifests/base/deployment.yaml
                   git commit -m "Update image to $IMAGE_NAME:$IMAGE_TAG" || echo "No changes to commit"
-                  git push origin master
+                  git push https://$GIT_USER:$GIT_PASS@github.com/mikiangelica/k8s-manifests.git master
                 """
 	    }
         }
