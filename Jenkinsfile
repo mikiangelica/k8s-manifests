@@ -40,6 +40,7 @@ pipeline {
                   git commit -m "Update image to $IMAGE_NAME:$IMAGE_TAG" || echo "No changes to commit"
                   git push https://$GIT_USER:$GIT_PASS@github.com/mikiangelica/k8s-manifests.git master
                 """
+		}
 	    }
         }
 
