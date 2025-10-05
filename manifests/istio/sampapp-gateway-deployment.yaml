@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sampapp-gateway-istio
+  namespace: default
+  labels:
+    istio: sampapp-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      istio: sampapp-gateway
+  template:
+    metadata:
+      labels:
+        istio: sampapp-gateway
+    spec:
+      containers:
+      - name: istio-proxy
+        image: auto  # Istiod will auto-inject the correct proxy
+        imagePullPolicy: Always
